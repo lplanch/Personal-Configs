@@ -1,0 +1,34 @@
+##################################
+#				 #
+#     Urxvt Apparence Section	 #
+#				 #
+##################################
+
+URxvt.inheritPixmap: true
+URxvt.reverseVideo: false
+URxvt.tintColor: #ffffff
+URxvt.shading: 0
+URxvt.fading: 10
+URxvt*font: xft:Monospace-12:antialias=true
+URxvt.boldFont: xft:Monospace-12:bold
+URxvt.scrollBar: false
+URxvt.scrollstyle: xterm
+URxvt.saveLines: 5500
+URxvt.cursorColor: white
+URxvt.cursorBlink: true
+URxvt.colorBD: white
+
+# Pour ne pas avoir de bordures
+#URxvt*borderLess: true
+
+# Pour avoir le marquage des urls et les ouvrir avec FF
+#URxvt.perl-ext-common: default,digital-clock,matcher
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: firefox
+
+#couleur des urls
+URxvt.colorBD: 3
+
+# Couleurs psychédéliquoblankoïques
+URxvt.background: black
+URxvt.foreground: white
