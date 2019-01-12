@@ -7,37 +7,19 @@
 ;=====================================================
 
 [colors]
-color15_i3wmthemer          = ${xrdb:color15}
-color14_i3wmthemer          = ${xrdb:color14}
-color13_i3wmthemer          = ${xrdb:color13}
-color12_i3wmthemer          = ${xrdb:color12}
-color11_i3wmthemer          = ${xrdb:color11}
-color10_i3wmthemer          = ${xrdb:color10}
-color09_i3wmthemer            = ${xrdb:color9}
-color08_i3wmthemer            = ${xrdb:color8}
-color07_i3wmthemer            = ${xrdb:color7}
-color06_i3wmthemer            = ${xrdb:color6}
-color05_i3wmthemer            = ${xrdb:color5}
-color04_i3wmthemer            = ${xrdb:color4}
-color03_i3wmthemer            = ${xrdb:color3}
-color02_i3wmthemer            = ${xrdb:color2}
-color01_i3wmthemer      = ${xrdb:color1}
-color00_i3wmthemer            = ${xrdb:color0}
-foreground_i3wmthemer   = ${xrdb:foreground}
-background_i3wmthemer   = ${xrdb:background}
 
-;background = ${xrdb:color0:#222}
 background = #222
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
+
 foreground = #dfdfdf
 foreground-alt = #555
+
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
 [bar/top]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = eDP-1
 width = 100%
 height = 22
 radius = 6.0
@@ -46,7 +28,7 @@ fixed-center = true
 background = #00000000
 foreground = #ccffffff
 
-line-color = ${colors.foreground_i3wmthemer}
+line-color = ${colors.foreground-alt}
 line-size = 4
 
 spacing = 2
@@ -63,15 +45,58 @@ font-3 = FontAwesome:size=10;0
 
 modules-left = i3
 modules-center = xwindow
-modules-right = cpu volume battery date
+modules-right = volume | cpu | wired-network | wireless-network | backlight | battery0 battery1 | date
 
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
 
-[module/battery]
+[module/|]
+type = custom/text
+content = │
+content-foreground = #999
+
+[module/battery0]
 type = internal/battery
-full-at = 98
+full-at = 99
+
+battery = BAT0
+adapter = AC
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/battery1]
+type = internal/battery
+full-at = 99
+
+battery = BAT1
+adapter = AC
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
@@ -109,7 +134,7 @@ wrapping-scroll = false
 
 label-mode-padding = 1
 label-mode-foreground = #000
-label-mode-background = ${colors.background_i3wmthemer}
+label-mode-background = ${colors.background}
 
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
@@ -121,7 +146,6 @@ label-unfocused-padding = 2
 
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${colors.color04_i3wmthemer}
 label-visible-padding = ${self.label-focused-padding}
 
 label-urgent = %index%!
@@ -161,8 +185,7 @@ ramp-coreload-7-foreground = #ff5555
 
 [module/date]
 type = internal/date
-date =    %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
-date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+date = %%{F#99}%d-%m-%Y%%{F-}  %%{F#fff}%H:%M%%{F-}
 
 [module/memory]
 type = internal/memory
@@ -183,39 +206,49 @@ bar-used-empty = ─
 bar-used-empty-font = 6
 bar-used-empty-foreground = #444444
 
-[module/wireless-network]
-type = internal/network
-interface = net1
-interval = 3.0
-ping-interval = 10
-
-format-connected = <ramp-signal> <label-connected>
-label-connected = %essid%
-label-disconnected =    not connected
-label-disconnected-foreground = #66
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-
-animation-packetloss-0 = 
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${bar/top.foreground}
-animation-packetloss-framerate = 500
-
 [module/wired-network]
 type = internal/network
-interface = net0
+interface = enp0s31f6
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected = %{F#fff}%local_ip%
+label-connected-foreground = #eefafafa
+label-disconnected = ETHERNET
+label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/wireless-network]
+type = internal/network
+interface = wlp58s0
 interval = 3.0
 
-label-connected =    %{T3}%local_ip%%{T-}
-label-disconnected-foreground = #66
+format-connected = <ramp-signal> <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected = %essid% %local_ip%
+label-connected-foreground = #eefafafa
+label-disconnected = WIFI
+label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = ☹
+ramp-signal-1 = ☹
+ramp-signal-2 = ☺
+ramp-signal-3 = ☺
+ramp-signal-4 = ☻
+ramp-signal-5 = ☻
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+
+label = LUM %percentage%%
+label-foreground = #fff
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
 label-volume = VOL
@@ -245,6 +278,6 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/clock]
 type = internal/date
 interval = 2
-date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+date = %%{F#999}%d-%m-%Y%%{F-}  %%{F#fff}%H:%M%%{F-}
 
 ; vim:ft=dosini
