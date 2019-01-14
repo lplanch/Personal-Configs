@@ -1,8 +1,10 @@
-##################################
-#				 #
-#     Urxvt Apparence Section	 #
-#				 #
-##################################
+!#################################
+!				 #
+!    Urxvt Apparence Section	 #
+!				 #
+!#################################
+
+URxvt.perl-ext-common: default,matcher,font-size,vtwheel,clipboard
 
 URxvt.inheritPixmap: true
 URxvt.reverseVideo: false
@@ -11,24 +13,53 @@ URxvt.shading: 0
 URxvt.fading: 10
 URxvt*font: xft:Monospace-12:antialias=true
 URxvt.boldFont: xft:Monospace-12:bold
+URxvt.italicFont: xft:Monospace-12:italic
 URxvt.scrollBar: false
-URxvt.scrollstyle: xterm
-URxvt.saveLines: 5500
+URxvt.scrollstyle: plain
+URxvt.saveLines: -1
 URxvt.cursorColor: white
 URxvt.cursorBlink: true
 URxvt.colorBD: white
 
-# Pour ne pas avoir de bordures
-#URxvt*borderLess: true
+URxvt*secondaryScroll: false
+URxvt*secondaryScreen: true
 
-# Pour avoir le marquage des urls et les ouvrir avec FF
-#URxvt.perl-ext-common: default,digital-clock,matcher
-URxvt.perl-ext-common: default,matcher
+URxvt.keysym.C-S-Up:   font-size:increase
+URxvt.keysym.C-S-Down: font-size:decrease
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
+
+! Pour ne pas avoir de bordures
+! URxvt*borderLess: true
+
+! Pour avoir le marquage des urls et les ouvrir avec FF
 URxvt.urlLauncher: firefox
 
-#couleur des urls
+! Couleur des urls
 URxvt.colorBD: 3
 
-# Couleurs psychédéliquoblankoïques
+! Couleurs psychédéliquoblankoïques
 URxvt.background: black
 URxvt.foreground: white
+
+! Other colors
+URxvt*color0: black
+!URxvt*color1: red3
+URxvt*color1: #CD0000
+URxvt*color2: green3
+!URxvt*color3: yellow3
+URxvt*color3: #C4A000
+URxvt*color4: blue2
+!URxvt*color4: #3465A4
+URxvt*color5: magenta3
+URxvt*color6: cyan3
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+!URxvt*color12: blue
+URxvt*color12: #3465A4
+URxvt*color13: magenta
+URxvt*color14: cyan
+URxvt*color15: white
